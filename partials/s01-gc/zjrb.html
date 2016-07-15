@@ -1,0 +1,191 @@
+<!--
+<div ng-controller="WeatherController" >
+    <div ng-repeat="item in data">
+        <div id="{{item.a}}">
+          <p>
+          {{item.a}}
+          </p>
+          <p>
+          {{item.b}}
+          </p>
+        </div>
+    </div>
+</div>
+-->
+
+<div class="wrapper" ng-controller="WeatherController"> 		
+
+<div class="inner-wrapper" >
+
+	<div class="title">    
+	<h5>日累钻井深度</h5>   
+	</div>
+
+	<div class="content" id="rlsd"></div>
+</div>
+            <script>
+
+            // Set the dimensions of the canvas / graph
+            var margin = {top: 20, right: 40, bottom: 40, left: 40},
+                width = d3.select("#rlsd").node().getBoundingClientRect().width - margin.left - margin.right,
+                height = 200 - margin.top - margin.bottom;
+
+            // Parse the date / time
+            var parseDate = d3.time.format("%d-%b-%y").parse;
+
+            // Set the ranges
+            var x = d3.time.scale().range([0, width]);
+            var y = d3.scale.linear().range([height, 0]);
+
+            // Define the axes
+            var xAxis = d3.svg.axis().scale(x)
+                .orient("bottom").ticks(5);
+
+            var yAxis = d3.svg.axis().scale(y)
+                .orient("left").ticks(5);
+
+            // Define the line
+            var valueline = d3.svg.line()
+                .x(function(d) { return x(d.date); })
+                .y(function(d) { return y(d.close); });
+
+            // Adds the svg canvas
+            var svg = d3.select("#rlsd")
+                .append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                    .attr("transform", 
+                          "translate(" + margin.left + "," + margin.top + ")");
+
+            // Get the data
+            d3.csv("data.csv", function(error, data) {
+                data.forEach(function(d) {
+                    d.date = parseDate(d.date);
+                    d.close = +d.close;
+                });
+
+                // Scale the range of the data
+                x.domain(d3.extent(data, function(d) { return d.date; }));
+                y.domain([0, d3.max(data, function(d) { return d.close; })]);
+
+                // Add the valueline path.
+                svg.append("path")
+                    .attr("class", "line")
+                    .attr("d", valueline(data));
+
+                // Add the X Axis
+                svg.append("g")
+                    .attr("class", "x axis")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(xAxis);
+
+                // Add the Y Axis
+                svg.append("g")
+                    .attr("class", "y axis")
+                    .call(yAxis);
+
+            });
+
+            </script>
+    
+    <div class="inner-wrapper" ng-repeat="item in data">
+        <div class="title" id="{{item.a}}">
+            <h5>井号：{{item.a}} &nbsp;&nbsp; 钻井队:{{item.b}}</h5>
+        </div>
+        
+        <div class="content">
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>设计m</th>
+                    <th>实际m</th>
+                    <th>钻达层位</th>
+                    <th>钻头尺寸mm</th>
+                    <th>钻井液</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{item.c}}</td>
+                    <td>{{item.d}}</td>
+                    <td>{{item.e}}</td>
+                    <td>{{item.f}}</td>
+                    <td>{{item.g}}</td>
+                  </tr>
+                </tbody>
+              </table>     
+            <h5>各次开钻时间：</h5>
+            <p>{{item.h}}</p>
+         
+            <h5>钻井参数：</h5>
+<!--
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>钻压KN</th>
+                    <th>钻速r/min</th>
+                    <th>排量l/s</th>
+                    <th>泵压Mpa</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{item.i}}</td>
+                    <td>{{item.j}}</td>
+                    <td>{{item.k}}</td>
+                    <td>{{item.l}}</td>
+                  </tr>
+                </tbody>
+              </table> 
+-->
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>密度g/cm3</th>
+                    <th>粘度pa.s</th>
+                    <th>当日m</th>
+                    <th>月累m</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{item.i}}</td>
+                    <td>{{item.j}}</td>
+                    <td>{{item.k}}</td>
+                    <td>{{item.l}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            <h5>工况简述：</h5>
+            <p>{{item.m}}</p>    
+            <h5>下步工序：</h5>
+            <p>{{item.n}}</p>
+        </div>
+    
+    </div>
+  
+
+
+    	
+ <% if( limit != null && limit.indexOf(",") <0){ %> 	
+    	<div id="alldata" style="text-align:center;">
+		<a class="btn btn-default" id="alldata-b" onclick ="loadRefPage()">加载所有数据</a>
+		</div>
+
+		<script>
+		
+		    function loadRefPage() {
+		        
+		        $(document).ready(function(){
+		            
+		                $.get("/touch/gcrb/yx_zjgc.jsp?limit=10,1000", function(data, status){
+		                  //  $('#alldata').html(data);
+		                   $('#alldata').hide();
+		                   $(document.body).append(data);
+		                });
+		            }); 
+		        };
+</script> 
+<% } %>    
+</div>

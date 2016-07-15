@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EPCloud</title>
+<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+<!-- custom css-->
+<link rel="stylesheet" type="text/css" href="css/menubar.css" />
+<link rel="stylesheet" href="css/first.css" media="screen" type="text/css" />
+<link rel="stylesheet" type="text/css" href="css/custom-cards.css" />
+
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    
+<style> /* 图表 CSS */
+
+path { 
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+#rlsd{
+    width: 100%;
+    height: 100%;
+}
+
+</style>
+    
+    <link rel="shortcut icon" href="">
+    
+    <script src='js/jquery-1.12.1.min.js'></script>
+    <script src='js/d3.min.js'></script>
+ 
+</head>
+<body>
+<div ng-app='APP'>
+    
+    <div class="header">
+        <ul>
+          <li><a>EPCloud</a></li>
+          <li class="pull-right"><a>退出</a></li>
+            
+        </ul>
+    </div>
+    
+<!--menu bar-->
+    <script src='js/menubar.js'></script>
+
+    <div class="first-level">
+        <ul>
+          <li><a id="f00" href="#/">首页</a></li>
+          <li><a id="f01">工程</a></li>
+          <li><a id="f02">生产</a></li>
+          <li><a id="f03">试气</a></li>
+          <li><a id="f04">采气</a></li>
+        
+        </ul>
+        
+        <div id="sidebtn" class=" btn-group pull-right pop-level" >
+            <a data-toggle="dropdown"><i class="fa fa-bars dropdown-toggle"></i></a>
+               <ul class="dropdown-menu">
+                    <li><a href="/touch/patchimg/thmatic/index.jsp">专题图</a></li>
+                    <li><a href="#">设置</a></li>
+               </ul>
+        </div>
+    </div>
+    
+    
+    <div class="second-level" id="s01">
+        <ul>
+          <li><a ui-sref="gc-zjrb" ui-sref-active="active">钻井日报</a></li>
+          <li><a ui-sref="gc-zqrb" ui-sref-active="active">钻前日报</a></li>
+          <li><a ui-sref="gc-sqgc" ui-sref-active="active">试气日报</a></li>
+          <li><a ui-sref="gc-cqgc" ui-sref-active="active">采气日报</a></li>
+          <li><a ui-sref="gc-dmgc" ui-sref-active="active">地面日报</a></li>
+          <li><a ui-sref="gc-gcsj" ui-sref-active="active">工程统计</a></li>
+        </ul>
+    </div>
+    
+    <div class="second-level" id="s02">
+        <ul>
+          <li><a ui-sref="sc-scrb" ui-sref-active="active">生产日报</a></li>
+          <li><a >日度对比</a></li>
+          <li><a >异常报表</a></li>
+          <li><a >生产月报</a></li>
+          <li><a >月度对比</a></li>
+          <li><a >单井日报</a></li>
+          <li><a >单井月报</a></li>
+          <li><a >新井日报</a></li>
+          <li><a >新井月报</a></li>
+          <li><a >区块日报</a></li>
+          <li><a >区块月报</a></li>
+          <li><a >日配产比</a></li>
+          <li><a >销售日报</a></li>
+        </ul>
+    </div>
+    
+    <div class="second-level" id="s03">
+        <ul>
+          <li><a ui-sref="sq-ylrb" ui-sref-active="active">压裂日报</a></li>
+          <li><a >压裂月报</a></li>
+          <li><a >压裂动态</a></li>
+          <li><a >压裂公报</a></li>
+          <li><a >公报附表</a></li>
+          <li><a >压裂记录</a></li>
+          <li><a >联作参数</a></li>
+          <li><a >钻塞参数</a></li>
+          <li><a >测试参数</a></li>
+          <li><a >测试记录</a></li> 
+          <li><a >试气反排</a></li>
+          <li><a >综合分析</a></li>
+        </ul>
+    </div>
+    
+    <div class="second-level" id="s04">
+        <ul>
+          <li><a ui-sref="cq-yqcl" ui-sref-active="active">压气产量</a></li>
+          <li><a >压裂动态</a></li>
+          <li><a >轨迹参数</a></li>
+          <li><a >压降产量</a></li>
+          <li><a >生产情况</a></li>
+          <li><a >生产对比</a></li>
+          <li><a >邻井对比</a></li>
+          <li><a >工程指标</a></li>
+          <li><a >&nbsp示踪剂&nbsp&nbsp</a></li>
+          <li><a >产气剖面</a></li>
+          <li><a >井下状况</a></li>
+          <li><a >&nbsp故障井&nbsp&nbsp</a></li>
+          <li><a >井下作业</a></li>
+          <li><a >井站加药</a></li>
+          <li><a >污水回注</a></li>
+        </ul>
+    </div>
+    
+   
+    <!-- view -->
+    <div ui-view></div>
+    
+</div>
+    
+    <!-- js source -->
+    <script src='js/bootstrap.min.js'></script>
+    <script src='js/angular.js'></script>
+    <script src="js/angular-ui-router.min.js"></script>
+    
+    <!-- custom js-->
+    <script src="js/homepage.js"></script>
+    <script src="js/custom-route.js"></script>
+    
+</body>
+</html>

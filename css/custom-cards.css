@@ -1,0 +1,22 @@
+.h5{
+    font-weight: 500;
+}
+.wrapper{
+    background-color: rgb(222,222,222);
+    height: 100%;
+    padding:10px;
+}
+    .inner-wrapper{
+        margin: auto;
+        margin-bottom: 10px;
+        width: 100%;
+        background-color: white;
+    }
+    .title{
+/*        background-color: rgb(193,240,255);*/
+        padding: 5px;
+        text-align: center;
+    }
+    .content{
+        padding: 10px;
+    }
